@@ -7,5 +7,3 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8000:80"
-    volumes:
-      - ./yii2app:/var/www/html

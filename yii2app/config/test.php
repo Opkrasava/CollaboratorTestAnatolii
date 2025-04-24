@@ -13,6 +13,12 @@ return [
         '@npm'   => '@vendor/npm-asset',
     ],
     'language' => 'en-US',
+    'container' => [
+        'definitions' => [
+            app\interfaces\NumberFilterInterface::class => app\services\NumberEvenFilterService::class,
+            app\interfaces\NumberAggregatorInterface::class => app\services\NumberSumService::class,
+        ],
+    ],
     'components' => [
         'db' => $db,
         'mailer' => [
@@ -26,7 +32,12 @@ return [
             'basePath' => __DIR__ . '/../web/assets',
         ],
         'urlManager' => [
+            'enablePrettyUrl' => true,
             'showScriptName' => true,
+            'enableStrictParsing' => false,
+            'rules' => [
+                'POST api/sum/even' => 'api/sum/even',
+            ],
         ],
         'user' => [
             'identityClass' => 'app\models\User',
@@ -40,6 +51,11 @@ return [
                 'domain' => 'localhost',
             ],
             */
+        ],
+    ],
+    'modules' => [
+        'api' => [
+            'class' => 'app\modules\api\Module',
         ],
     ],
     'params' => $params,

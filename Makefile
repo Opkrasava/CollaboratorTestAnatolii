@@ -4,13 +4,8 @@ init:
 up:
 	docker-compose up -d --build
 
-bash:
-	docker-compose exec app bash
-
-migrate:
-	docker-compose exec app php bin/console doctrine:migrations:migrate
-
 down:
 	docker-compose down
 
-
+test:
+	docker-compose exec an_yii2app bash -c "vendor/bin/codecept build && vendor/bin/codecept run"

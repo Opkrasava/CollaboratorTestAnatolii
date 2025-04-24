@@ -11,6 +11,10 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Копируем Yii2 приложение в Apache root
 COPY ./yii2app /var/www/html/
 
+RUN chmod -R 777 /var/www/html/runtime /var/www/html/web/assets
+
+RUN composer install --no-interaction
+
 # Настройка прав и включение mod_rewrite
 RUN chown -R www-data:www-data /var/www/html \
     && a2enmod rewrite
